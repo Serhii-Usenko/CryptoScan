@@ -1,6 +1,7 @@
 import {
     CircularProgress,
   Container,
+  Pagination,
   Table,
   TableBody,
   TableCell,
@@ -20,6 +21,7 @@ import { CryptoState } from "../CryptoContext";
 const CoinTable = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
 
   const { curr, symb } = CryptoState();
@@ -40,7 +42,7 @@ const CoinTable = () => {
     return data.filter(it => it.id.includes(search.toLowerCase()) || it.symbol.includes(search.toLowerCase()))
   }
 
-  console.log(onSearch())
+  console.log(data)
 
   return (
     <Container>
@@ -57,14 +59,15 @@ const CoinTable = () => {
           label="Search cryptocurrency"
           variant="outlined"
           focused
-          sx={{ width: "90%", margin: "30px" }}
+          sx={{ width: "81%", margin: "30px" }}
         />
       </Container>
 
       <Container align='center'>
         <TableContainer
           sx={{
-
+            width: 'max-content',
+            padding: '5px'
           }}
         >{loading ? <CircularProgress sx={{marginBottom: '50px'}}/> : (
             <Table sx={{width: "90%", 
@@ -73,32 +76,37 @@ const CoinTable = () => {
                         borderRadius: "10px" }}>
             <TableHead>
               <TableRow>
-                <TableCell align='center'sx={{fontWeight: '700', fontSize: '20px'}}>Coin</TableCell>
-                <TableCell align="center" sx={{fontWeight: '700', fontSize: '20px'}}>Price</TableCell>
-                <TableCell align="center" sx={{fontWeight: '700', fontSize: '20px'}}>24h Change</TableCell>
-                <TableCell align="center" sx={{fontWeight: '700', fontSize: '20px'}}>Market Cap</TableCell>
+                <TableCell align='center'sx={{fontWeight: '700', fontSize: '20px', width: '250px'}}>Coin</TableCell>
+                <TableCell align="center" sx={{fontWeight: '700', fontSize: '20px', width: '250px'}}>Price</TableCell>
+                <TableCell align="center" sx={{fontWeight: '700', fontSize: '20px', width: '250px'}}>24h Change</TableCell>
+                <TableCell align="center" sx={{fontWeight: '700', fontSize: '20px', width: '250px'}}>Market Cap</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody >
-                {onSearch().map((row, i) => (
-                   <TableRow key={row.id}>
-                        <TableCell sx={{width: '100px'}}>
-                            <Box sx={{fontSize: '25px'}}>{i + 1}</Box>
+            <TableBody>
+                {onSearch().slice((page - 1) * 10, (page - 1) * 10 + 10).map((row, i) => (
+                   <TableRow sx={{
+                    cursor: 'pointer',
+                    '&:hover': {
+                      backgroundColor: 'lightyellow'
+                    }
+                   }} key={row.id}>
+                        <TableCell component="th" scope="row" sx={{padding: '2px'}}>
+
                             <Box>
                                 <Container align='center'>
                                     <img 
                                         src={row.image}
                                         alt='hello'
-                                        height="50"
+                                        height="30px"
                                     />
                                 </Container>
-                                <Typography align='center' sx={{marginBottom: '10px', fontSize: "12px"}}>{row.symbol}</Typography>
+                                <Typography align='center' sx={{fontSize: "12px"}}>{row.symbol}</Typography>
                                 <Typography align='center' sx={{fontWeight: '600'}}>{row.id}</Typography>
                             </Box>
                         </TableCell>
-                        <TableCell align="center" sx={{width: '100px', fontWeight: '600'}}>{row.current_price}</TableCell>
-                        <TableCell align="center" sx={{width: '100px', fontWeight: '600', color: Math.floor((row.price_change_24h) * 1000) / 1000 > 0 ? 'green' : 'red'}}>{(Math.floor((row.price_change_24h) * 1000) / 1000) > 0 ? `+${Math.floor((row.price_change_24h) * 1000) / 1000}` : Math.floor((row.price_change_24h) * 1000) / 1000}</TableCell>
-                        <TableCell align="center" sx={{width: '100px', fontWeight: '600'}}>{row.market_cap}</TableCell>
+                        <TableCell align="center" sx={{fontWeight: '600', padding: '2px'}}>{`${(Math.floor(row.current_price * 100) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} $`}</TableCell>
+                        <TableCell align="center" sx={{fontWeight: '600', padding: '2px', color: Math.floor(row.market_cap_change_percentage_24h * 100) / 100 > 0 ? 'green' : 'red'}}>{`${(Math.floor((row.market_cap_change_percentage_24h) * 1000) / 1000)} %`}</TableCell>
+                        <TableCell align="center" sx={{fontWeight: '600', padding: '2px'}}>{`${row.market_cap.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} $`}</TableCell>
                    </TableRow>
                 ))}
             </TableBody>
@@ -106,7 +114,24 @@ const CoinTable = () => {
         )}
           
         </TableContainer>
+        <Pagination
+          count={(onSearch().length / 10).toFixed(0)}
+          color="primary"
+          sx={{display: 'flex', justifyContent: 'center', marginTop: '20px'}}
+          onChange={(e, value) => {
+            setPage(value)
+            window.scroll(0, 660)
+          }} 
+        />
       </Container>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
     </Container>
   );
 };
