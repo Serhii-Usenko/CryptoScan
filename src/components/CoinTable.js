@@ -14,6 +14,7 @@ import {
 import { Box } from "@mui/system";
 import axios from "axios";
 import React, { useEffect } from "react";
+import {useHistory} from 'react-router-dom';
 import { useState } from "react";
 import { CoinList } from "../config/api";
 import { CryptoState } from "../CryptoContext";
@@ -23,7 +24,7 @@ const CoinTable = () => {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
-
+  const history = useHistory();
   const { curr, symb } = CryptoState();
 
   const CoinTableData = async () => {
@@ -41,8 +42,6 @@ const CoinTable = () => {
   const onSearch = () => {
     return data.filter(it => it.id.includes(search.toLowerCase()) || it.symbol.includes(search.toLowerCase()))
   }
-
-  console.log(data)
 
   return (
     <Container>
@@ -76,19 +75,21 @@ const CoinTable = () => {
                         borderRadius: "10px" }}>
             <TableHead>
               <TableRow>
-                <TableCell align='center'sx={{fontWeight: '700', fontSize: '20px', width: '250px'}}>Coin</TableCell>
-                <TableCell align="center" sx={{fontWeight: '700', fontSize: '20px', width: '250px'}}>Price</TableCell>
-                <TableCell align="center" sx={{fontWeight: '700', fontSize: '20px', width: '250px'}}>24h Change</TableCell>
-                <TableCell align="center" sx={{fontWeight: '700', fontSize: '20px', width: '250px'}}>Market Cap</TableCell>
+                <TableCell align='center'sx={{fontWeight: '700', fontSize: '20px', width: '100px'}}>Coin</TableCell>
+                <TableCell align="center" sx={{fontWeight: '700', fontSize: '20px', width: '100px'}}>Price</TableCell>
+                <TableCell align="center" sx={{fontWeight: '700', fontSize: '20px', width: '100px'}}>24h Change</TableCell>
+                <TableCell align="center" sx={{fontWeight: '700', fontSize: '20px', width: '100px'}}>Market Cap</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
                 {onSearch().slice((page - 1) * 10, (page - 1) * 10 + 10).map((row, i) => (
-                   <TableRow sx={{
-                    cursor: 'pointer',
-                    '&:hover': {
-                      backgroundColor: 'lightyellow'
-                    }
+                   <TableRow
+                    onClick={() => history.push(`/coins/${row.id}`)}
+                    sx={{
+                      cursor: 'pointer',
+                      '&:hover': {
+                        backgroundColor: 'lightyellow'
+                      }
                    }} key={row.id}>
                         <TableCell component="th" scope="row" sx={{padding: '2px'}}>
 
