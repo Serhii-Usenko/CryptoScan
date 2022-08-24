@@ -2,6 +2,7 @@ import axios from "axios";
 import AppBar from "@mui/material/AppBar";
 import { Container } from "@mui/system";
 import {
+  Box,
   FormControl,
   InputLabel,
   MenuItem,
@@ -11,6 +12,7 @@ import {
 } from "@mui/material";
 import { CryptoState } from "../CryptoContext";
 import { useState } from "react";
+import AuthModal from "./authentication/AuthModal";
 
 const Header = () => {
   const {curr, setCurr} = CryptoState();
@@ -44,20 +46,29 @@ const Header = () => {
           </Typography>
           <FormControl variant='standard' sx={{marginLeft: 'auto'}}>
             <InputLabel id="demo-simple-select-label">Currency</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              label="Age"
-              value={curr}
-              onChange={e => setCurr(e.target.value)}
-              sx={{
-                width: '120px'
-              }}
-            >
-              <MenuItem value={'USD'}>USD</MenuItem>
-              <MenuItem value={'EUR'}>EUR</MenuItem>
-              <MenuItem value={'UAH'}>UAH</MenuItem>
-            </Select>
+            <Box sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                label="Age"
+                value={curr}
+                onChange={e => setCurr(e.target.value)}
+                sx={{
+                  width: '120px',
+                  height: '40px'
+                }}
+              >
+                <MenuItem value={'USD'}>USD</MenuItem>
+                <MenuItem value={'EUR'}>EUR</MenuItem>
+                <MenuItem value={'UAH'}>UAH</MenuItem>
+              </Select>
+              <Box  sx={{paddingLeft: '20px'}}>
+                <AuthModal/>
+              </Box>
+            </Box>
           </FormControl>
         </Toolbar>
       </Container>

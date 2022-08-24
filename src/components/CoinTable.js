@@ -20,20 +20,10 @@ import { CoinList } from "../config/api";
 import { CryptoState } from "../CryptoContext";
 
 const CoinTable = () => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const history = useHistory();
-  const { curr, symb } = CryptoState();
-
-  const CoinTableData = async () => {
-    setLoading(true);
-    const { data } = await axios.get(CoinList(curr));
-
-    setData(data);
-    setLoading(false);
-  };
+  const { curr, symb, data, loading, CoinTableData } = CryptoState();
 
   useEffect(() => {
     CoinTableData();
