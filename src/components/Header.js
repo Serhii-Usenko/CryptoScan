@@ -13,9 +13,10 @@ import {
 import { CryptoState } from "../CryptoContext";
 import { useState } from "react";
 import AuthModal from "./authentication/AuthModal";
+import UserSideBar from "./authentication/UserSideBar";
 
 const Header = () => {
-  const {curr, setCurr} = CryptoState();
+  const {curr, setCurr, user} = CryptoState();
   const [rate, setRate] = useState([]);
 
   const fetchCoins = async () => {
@@ -66,7 +67,7 @@ const Header = () => {
                 <MenuItem value={'UAH'}>UAH</MenuItem>
               </Select>
               <Box  sx={{paddingLeft: '20px'}}>
-                <AuthModal/>
+                {user ? <UserSideBar /> : <AuthModal/>}
               </Box>
             </Box>
           </FormControl>

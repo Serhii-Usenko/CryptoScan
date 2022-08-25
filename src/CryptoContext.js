@@ -1,9 +1,11 @@
 import axios from "axios";
+import { onAuthStateChanged } from "firebase/auth";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useContext } from "react";
 import { createContext } from "react";
 import { CoinList } from "./config/api";
+import {auth} from './firebaseApp';
 
 const Crypto = createContext();
 
@@ -16,9 +18,16 @@ const CryptoContext = ({ children }) => {
   const [user, setUser] = useState(null);
   const [alert, setAlert] = useState({
     open: false,
-    message: "",
-    type: "succes",
+    message: "hello",
+    type: "success",
   });
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if(user) setUser(user);
+      else setUser(null);
+    })
+  }, []);
 
   const CoinTableData = async () => {
     setLoading(true);
@@ -48,7 +57,8 @@ const CryptoContext = ({ children }) => {
         loading,
         CoinTableData,
         alert,
-        setAlert
+        setAlert,
+        user
     }}
     >
       {children}
