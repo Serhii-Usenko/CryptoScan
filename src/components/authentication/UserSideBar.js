@@ -2,14 +2,16 @@ import * as React from 'react';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import { CryptoState } from '../../CryptoContext';
-import { Avatar, Box } from '@mui/material';
+import { Avatar, Box, Typography } from '@mui/material';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../firebaseApp';
 
 export default function UserSideBar() {
   const [state, setState] = React.useState({
     right: false,
   });
 
-  const {user} = CryptoState();
+  const {user, setAlert} = CryptoState();
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -17,6 +19,16 @@ export default function UserSideBar() {
     }
 
     setState({ ...state, [anchor]: open });
+  };
+
+  const logOut = () => {
+    signOut(auth);
+
+    setAlert({
+      open: true,
+      type: 'success',
+      message: 'Logout Successfull!'
+    })
   };
 
   return (
@@ -60,8 +72,33 @@ export default function UserSideBar() {
                     }}
                 />
                 <span>{user.displayName || user.email}</span>
-
+                <Box
+                  sx={{
+                    width: '100%',
+                    height: '90%',
+                    backgroundColor: '#ffd',
+                    borderRadius: '15px',
+                    padding: '15px',
+                    paddingTop: '15px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: 12,
+                    overflowY: 'scroll'
+                  }}
+                >
+                  <Typography variant="h5">
+                    WatchList
+                  </Typography>
+                </Box>
             </Box>
+
+            <Button
+              variant='contained'
+              onClick={logOut}
+            >
+              LogOut
+            </Button>
           </Drawer>
         </React.Fragment>
       ))}
