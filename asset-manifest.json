@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/CryptoScan/static/css/main.3061156b.css",
-    "main.js": "/CryptoScan/static/js/main.c953a4cd.js",
-    "index.html": "/CryptoScan/index.html",
-    "main.3061156b.css.map": "/CryptoScan/static/css/main.3061156b.css.map",
-    "main.c953a4cd.js.map": "/CryptoScan/static/js/main.c953a4cd.js.map"
+    "main.css": "/cryptoscan/static/css/main.3061156b.css",
+    "main.js": "/cryptoscan/static/js/main.c953a4cd.js",
+    "index.html": "/cryptoscan/index.html",
+    "main.3061156b.css.map": "/cryptoscan/static/css/main.3061156b.css.map",
+    "main.c953a4cd.js.map": "/cryptoscan/static/js/main.c953a4cd.js.map"
   },
   "entrypoints": [
     "static/css/main.3061156b.css",
