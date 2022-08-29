@@ -11,8 +11,8 @@ function App() {
     <BrowserRouter>
       <div className="app">
         <Header />
-        <Route exact path="/" component={Homepage} />
-        <Route exact path="/coins/:id" component={CoinPage} />
+        <Route exact path="/CryptoScan" component={Homepage} />
+        <Route exact path="/CryptoScan/coins/:id" component={CoinPage} />
       </div>
       <ErrorPass />
     </BrowserRouter>
