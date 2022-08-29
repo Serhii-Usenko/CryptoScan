@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/CryptoScan/static/css/main.3061156b.css",
-    "main.js": "/CryptoScan/static/js/main.20b9b8d9.js",
+    "main.js": "/CryptoScan/static/js/main.85b20160.js",
     "index.html": "/CryptoScan/index.html",
     "main.3061156b.css.map": "/CryptoScan/static/css/main.3061156b.css.map",
-    "main.20b9b8d9.js.map": "/CryptoScan/static/js/main.20b9b8d9.js.map"
+    "main.85b20160.js.map": "/CryptoScan/static/js/main.85b20160.js.map"
   },
   "entrypoints": [
     "static/css/main.3061156b.css",
-    "static/js/main.20b9b8d9.js"
+    "static/js/main.85b20160.js"
   ]
 }
