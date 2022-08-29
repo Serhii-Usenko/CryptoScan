@@ -129,7 +129,7 @@ export default function UserSideBar() {
                           border: '1px solid black'
                         }}
                       >
-                        <Link to={`/CryptoScan/coins/${coin.id}`}>
+                        <Link to={`/coins/${coin.id}`}>
                           <Typography sx={{color: 'black'}}>{coin.name}</Typography>
                         </Link>
                         <span>{`${coin.current_price}$`}</span>

@@ -1,5 +1,7 @@
 {
   "projects": {
     "default": "crypto-scan-117e5"
-  }
+  },
+  "targets": {},
+  "etags": {}
 }

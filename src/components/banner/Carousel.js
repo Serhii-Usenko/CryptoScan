@@ -26,7 +26,7 @@ const Carousel = () => {
   const items = trending.map((coin) => {
     return (
       <Box display="flex" justifyContent='center'>
-        <Link to={`/CryptoScan/coins/${coin.id}`}>
+        <Link to={`/coins/${coin.id}`}>
           <Box
             component="img"
             src={coin.image}
