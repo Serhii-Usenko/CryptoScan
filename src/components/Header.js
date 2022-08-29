@@ -14,6 +14,7 @@ import { CryptoState } from "../CryptoContext";
 import { useState } from "react";
 import AuthModal from "./authentication/AuthModal";
 import UserSideBar from "./authentication/UserSideBar";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const {curr, setCurr, user} = CryptoState();
@@ -41,7 +42,9 @@ const Header = () => {
     >
       <Container>
         <Toolbar>
-          <Typography sx={{ color: "black", fontWeight: 900}}>CryptoRadar</Typography>
+          <Link to={'/'}>
+            <Typography sx={{ color: "black", fontWeight: 900}}>CryptoRadar</Typography>
+          </Link>
           <Typography sx={{ color: "black", fontWeight: 400, marginLeft: '10%', fontSize: '13px'}}>
             {res}
           </Typography>
